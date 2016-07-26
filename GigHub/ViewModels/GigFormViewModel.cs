@@ -12,5 +12,10 @@ namespace GigHub.ViewModels
         //For dropdown list you need the numeric value
         public byte Genre { get; set; }
         public IEnumerable<Genre> Genres { get; set; }
+
+        public DateTime DateTime
+        {
+            get { return DateTime.Parse($"{Date} {Time}"); }
+        }
     }
 }
