@@ -210,10 +210,12 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AttendancesController.cs" />
+    <Compile Include="Controllers\FollowArtistController.cs" />
     <Compile Include="Controllers\GigsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Dtos\AttendanceDto.cs" />
+    <Compile Include="Dtos\FollowArtistDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -245,9 +247,30 @@
     <Compile Include="Migrations\201608051534534_AddAttendance.Designer.cs">
       <DependentUpon>201608051534534_AddAttendance.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608112103261_AddFollowArtist.cs" />
+    <Compile Include="Migrations\201608112103261_AddFollowArtist.Designer.cs">
+      <DependentUpon>201608112103261_AddFollowArtist.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608120613164_ChangeFollowArtistUserIdToString.cs" />
+    <Compile Include="Migrations\201608120613164_ChangeFollowArtistUserIdToString.Designer.cs">
+      <DependentUpon>201608120613164_ChangeFollowArtistUserIdToString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608120629141_AddFollowArtistAgain.cs" />
+    <Compile Include="Migrations\201608120629141_AddFollowArtistAgain.Designer.cs">
+      <DependentUpon>201608120629141_AddFollowArtistAgain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608121546255_AddRemoveOldFollowArtistTable.cs" />
+    <Compile Include="Migrations\201608121546255_AddRemoveOldFollowArtistTable.Designer.cs">
+      <DependentUpon>201608121546255_AddRemoveOldFollowArtistTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608121607203_AddFollowingFeatures.cs" />
+    <Compile Include="Migrations\201608121607203_AddFollowingFeatures.Designer.cs">
+      <DependentUpon>201608121607203_AddFollowingFeatures.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Attendence.cs" />
+    <Compile Include="Models\Following.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\Gig.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -260,6 +283,7 @@
     <Compile Include="ViewModels\ForgotViewModel.cs" />
     <Compile Include="ViewModels\FutureDate.cs" />
     <Compile Include="ViewModels\GigFormViewModel.cs" />
+    <Compile Include="ViewModels\GigsViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\ResetPasswordViewModel.cs" />
@@ -306,7 +330,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Gigs.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -363,6 +387,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608051534534_AddAttendance.resx">
       <DependentUpon>201608051534534_AddAttendance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608112103261_AddFollowArtist.resx">
+      <DependentUpon>201608112103261_AddFollowArtist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608120613164_ChangeFollowArtistUserIdToString.resx">
+      <DependentUpon>201608120613164_ChangeFollowArtistUserIdToString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608120629141_AddFollowArtistAgain.resx">
+      <DependentUpon>201608120629141_AddFollowArtistAgain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608121546255_AddRemoveOldFollowArtistTable.resx">
+      <DependentUpon>201608121546255_AddRemoveOldFollowArtistTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608121607203_AddFollowingFeatures.resx">
+      <DependentUpon>201608121607203_AddFollowingFeatures.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
