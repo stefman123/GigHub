@@ -63,8 +63,9 @@ span.field-validation-error {
 
 .dropdown-menu {
 
-     -webkit-box-shadow:none; 
-     box-shadow: none; 
+    -webkit-box-shadow:none;
+    -ms-box-shadow: none;
+    box-shadow: none;
 }
 
 .navbar-inverse .navbar-nav > .dropdown > a .caret {
@@ -102,19 +103,26 @@ h6,
     margin-bottom: 20px;
 }
 
-.form-control {
+/*.form-control {
     padding: 20px 15px;
     font-size: 17px;
     -ms-border-radius: 9px;
     border-radius: 9px;
+}*/
+
+.form-control {
+    font-size: 12px;
+    /*padding: 20px 15px;*/
+    -ms-border-radius: 9px;
+    border-radius: 9px;
 }
 
-.form-control:focus {
-    border-color: #2196f3;
-    box-shadow: none;
-    -webkit-box-shadow: none;
-
-}
+    .form-control:focus {
+        border-color: #2196f3;
+        -webkit-box-shadow: none;
+        -ms-box-shadow: none;
+        box-shadow: none;
+    }
 
 .btn {
     /*font-size: 17px;

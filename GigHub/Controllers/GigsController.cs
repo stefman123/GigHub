@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
@@ -29,13 +28,24 @@ namespace GigHub.Controllers
 
             return View(viewModel);
         }
+        [Authorize]
+        public ActionResult CurrentGigs()
+        {
+            var loggedUserId = User.Identity.GetUserId();
+            var upcomingGigs = _context.Gigs
+                .Where(g => g.ArtistId == loggedUserId && g.DateTime > DateTime.Now)
+                .Include(g=>g.Genre)
+                .ToList();
+
+            return View(upcomingGigs);
+        }
 
         [Authorize]
-        public ActionResult GetLogInUserGigsAttending()
+        public ActionResult GigsAttending()
         {
-            var LogInUserId = User.Identity.GetUserId();
+            var logInUserId = User.Identity.GetUserId();
             var gigsAttending = _context.Attendences
-                .Where(a => a.AttendeeId == LogInUserId)
+                .Where(a => a.AttendeeId == logInUserId)
                 .Select(a => a.Gig)
                 .Include( g => g.Artist)
                 .Include(g => g.Genre)
@@ -81,7 +91,7 @@ namespace GigHub.Controllers
             _context.Gigs.Add(gig);
             _context.SaveChanges();
 
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("CurrentGigs","Gigs");
 
         }        
     }

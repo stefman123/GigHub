@@ -1,0 +1,24 @@
+﻿@using GigHub.Models
+@model IEnumerable<GigHub.Models.ApplicationUser>
+
+@{
+    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<h1>Artist I'm Following</h1>
+
+<body>
+
+      @foreach (ApplicationUser followee in Model)
+      {
+        <div>
+            @followee.Name
+        </div>
+      }
+        
+</body>
+</html>

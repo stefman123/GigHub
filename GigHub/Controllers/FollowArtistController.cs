@@ -25,6 +25,9 @@ namespace GigHub.Controllers
         {
             var currentUser = User.Identity.GetUserId();
 
+            if (dto.ArtistId == currentUser)
+                return BadRequest("Cant follow yourself");
+
             if (_context.Following.Any(f=> f.FolloweeId == currentUser &&  f.FolloweeId == dto.ArtistId))
                 return BadRequest("Following already exists.");
             
