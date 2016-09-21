@@ -1,0 +1,66 @@
+﻿@model GigHub.ViewModels.GigViewModel
+
+@{
+    ViewBag.Title = "GigDetails";
+}
+
+
+<div class="form-group">
+    <span>@Model.Gig.Artist.Name</span>
+    @if (Model.IsFollowing)
+    {
+        <span data-artistDetail-id="@Model.Gig.Artist.Id" class="btn btn-default btn-sm js-toggle-followDetails">Following </span>
+    }
+</div>
+
+<div>
+    <span> Performing at @Model.Gig.Venue on @Model.Gig.DateTime.ToString("dd MMM") at @Model.Gig.DateTime.ToString("t") </span>
+</div>.
+
+@if (Model.IsAttending && User.Identity.IsAuthenticated)
+{
+    <div>
+        <span class="js-toggle-goingEvent"> You are going to this event! </span>
+    </div>
+}
+
+
+@section scripts
+{
+    <script>
+        $(document)
+            .ready(function () {
+
+                //$(".js-toggle-followDetails")
+                //    .click(function (e) {
+                //            var button = $(e.target);
+                //        $.post("/api/Testing", { ArtistTestId: button.attr("data-artistDetail-id") })
+                //            .done(function () {
+                //                button.removeClass("btn-default")
+                //                    .addClass("btn-info")
+                //                    .text("Following!");
+                //            })
+                //            .fail(function () {
+                //                alert("Something Failed Artist");
+                //            });
+                //    });
+
+                var target = $(".js-toggle-followDetails");
+
+                $.post("/api/Testing", { ArtistTestId: target.attr("data-artistDetail-id") })
+                            .done(function () {
+                                target.removeClass("btn-default")
+                                    .addClass("btn-info")
+                                    .text("Following!");
+                            })
+                            .fail(function () {
+                                target.text("Follower");
+                                $(".js-toggle-goingEvent").hide();
+                            });
+
+
+
+            });
+
+    </script>
+}

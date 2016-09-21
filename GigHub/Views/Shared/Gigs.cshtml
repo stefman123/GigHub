@@ -5,6 +5,20 @@
 }
 <h1>@Model.Heading</h1>
 
+@using (Html.BeginForm("Search", "Gigs"))
+{
+    <div class="form-group">
+        @*@Html.LabelFor(m => m.SearchChars)*@
+        <div id="SearchGigs" class="input-group js-SearchGig">
+   
+            @Html.TextBoxFor(m => m.SearchChars, new {@class = "form-control"})
+            <span class="input-group-addon">
+                 <i class="glyphicon glyphicon-search"></i>     
+             </span>
+        </div>
+    </div>
+}
+
 <ul class="gigs voffset4">
     @foreach (var gig in Model.UpcomingGigs)
     {
@@ -19,7 +33,14 @@
             </div>
             <div class="details">
                 <span class="artist">
-                    @gig.Artist.Name
+                    
+                    @*data-gig-id="@gig.Id" class="a" href="/gigs/GigDetails"*@
+
+                    <span >
+                        @*@gig.Artist.Name*@
+                        @Html.ActionLink(@gig.Artist.Name.ToString(),"GigDetails","Gigs", new { id = gig.Id},null)
+                    </span>
+                  
                     
                     @if (@gig.IsCanceled)
                     {
@@ -27,22 +48,28 @@
                     }
 
 
-                     @if(Model.ShowActions)
-                    {
-                    <button data-artist-id="@gig.Artist.Id" class="btn btn-default btn-sm js-toggle-follow">Follow?</button>
-                    }               
+                     @if (Model.ShowActions)
+                     {
+                         <button data-artist-id="@gig.Artist.Id" class="btn btn-default btn-sm js-toggle-follow">Follow?</button>
+                     }               
                 </span>              
                 <span class="genre">
                     @gig.Genre.Name
                 </span>
                 @if (Model.ShowActions && !gig.IsCanceled)
                 {
-                    <button data-gig-id="@gig.Id" class="btn btn-default btn-sm pull-right js-toggle-attendance">Going?</button>
+                    <button
+                        data-gig-id="@gig.Id"
+                        class="btn 
+                            @(Model.Attendances.Contains(gig.Id) ? "btn-info" : "btn-default") 
+                            btn-sm pull-right js-toggle-attendance">
+                        Going?
+                    </button>
                 }
             </div>
 
         </li>
-    }
+        }
 
 </ul>
 
@@ -52,29 +79,13 @@
         $(document)
             .ready(function() {
 
-
-                $(".js-toggle-attendance")
-                    .click(function(e) {
-                        var button = $(e.target);
-                        //Jquery post method
-                        $.post("/api/attendances", { GigId: button.attr("data-gig-id") })
-                            .done(function() {
-                                button.removeClass("btn-default")
-                                    .addClass("btn-info")
-                                    .text("Going!");
-
-                            })
-                            .fail(function() {
-                                alert("Something Failed");
-                            });
-
-                    });
+                GigsController.init();
 
                 $(".js-toggle-follow")
                     .click(function(e) {
 
                         var button = $(e.target);
-                        $.post("api/followartist", { ArtistId: button.attr("data-artist-id") })
+                        $.post("/api/followartist", { ArtistId: button.attr("data-artist-id") })
                             .done(function() {
                                 button.removeClass("btn-default")
                                     .addClass("btn-info")
@@ -84,6 +95,13 @@
                                 alert("Something Failed Artist");
                             });
                     });
+
+                $(".js-SearchGig")
+                    .click(function(e) {
+                        var button = $(e.target);
+
+                    });
+
             });
     </script>
 }

@@ -52,6 +52,16 @@ span.field-validation-error {
     color: #fff;
 }
 
+.navbar-inverse .notifications {
+    position: relative;
+}
+.navbar-inverse .notifications .badge {
+    position: absolute;
+    top:8px;
+    right: -1px;
+    background: #a80a0a
+}
+
 .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
     background-color: #d92020;
 }
@@ -135,6 +145,8 @@ h6,
     list-style: none;
 }
 
+/*.input-group*/ 
+
 /*pages-Level styles*/
 .gigs > li {
     position: relative;
@@ -188,4 +200,28 @@ h6,
 
  .gigs > li:hover .actions {
      display: block;
+ }
+
+ .popover-notifications .popover-content {
+     padding: 0;
+ }
+
+  .popover-notifications ul.notifications {
+     list-style: none;
+     padding-left: 0;
+ }
+
+ .popover-notifications ul.notifications > li {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+}
+    .popover-notifications ul.notifications > li:last-child {
+        border-bottom: none;
+    }
+ .popover-notifications ul.notifications .highlight {
+    font-weight: bold;
+}
+
+ #SearchGigs {
+     width: 300px;
  }
