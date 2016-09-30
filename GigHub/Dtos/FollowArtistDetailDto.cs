@@ -9,7 +9,7 @@ namespace GigHub.Dtos
     {
             public string ArtistDetailId { get; set; }
 
-        public string ArtistDetail { get; set; }
+        //public string ArtistDetail { get; set; }
        
     }
 }

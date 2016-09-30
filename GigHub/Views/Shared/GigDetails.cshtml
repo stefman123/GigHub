@@ -9,13 +9,17 @@
     <span>@Model.Gig.Artist.Name</span>
     @if (Model.IsFollowing)
     {
-        <span data-artistDetail-id="@Model.Gig.Artist.Id" class="btn btn-default btn-sm js-toggle-followDetails">Following </span>
+        <span data-artistDetail-id="@Model.Gig.Artist.Id" class="btn btn-info btn-sm js-toggle-followDetails">Following! </span>
+    }
+    else
+    {
+        <span data-artistDetail-id="@Model.Gig.Artist.Id" class="btn btn-default btn-sm js-toggle-followDetails">Follow? </span>
     }
 </div>
 
 <div>
     <span> Performing at @Model.Gig.Venue on @Model.Gig.DateTime.ToString("dd MMM") at @Model.Gig.DateTime.ToString("t") </span>
-</div>.
+</div>
 
 @if (Model.IsAttending && User.Identity.IsAuthenticated)
 {
@@ -47,16 +51,18 @@
 
                 var target = $(".js-toggle-followDetails");
 
-                $.post("/api/Testing", { ArtistTestId: target.attr("data-artistDetail-id") })
-                            .done(function () {
-                                target.removeClass("btn-default")
-                                    .addClass("btn-info")
-                                    .text("Following!");
-                            })
-                            .fail(function () {
-                                target.text("Follower");
-                                $(".js-toggle-goingEvent").hide();
-                            });
+                ArtistController.init();
+
+                //$.post("/api/Testing", { ArtistTestId: target.attr("data-artistDetail-id") })
+                //            .done(function () {
+                //                target.removeClass("btn-default")
+                //                    .addClass("btn-info")
+                //                    .text("Following!");
+                //            })
+                //            .fail(function () {
+                //                target.text("Follow?");
+                //                $(".js-toggle-goingEvent").hide();
+                //            });
 
 
 

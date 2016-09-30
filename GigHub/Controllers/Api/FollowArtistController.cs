@@ -1,12 +1,15 @@
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Results;
+using System.Web.Mvc;
+using System.Web.Services.Description;
 using GigHub.Dtos;
 using GigHub.Models;
 using Microsoft.AspNet.Identity;
 
 namespace GigHub.Controllers.Api
 {
-    [Authorize]
+    [System.Web.Http.Authorize]
     public class FollowArtistController : ApiController
     {
         ApplicationDbContext _context;
@@ -38,25 +41,46 @@ namespace GigHub.Controllers.Api
 
         //        }
 
-
-        public IHttpActionResult Follow(FollowArtistDto dto)
+            [System.Web.Http.HttpPost]
+        public IHttpActionResult Follow(FollowArtistDetailDto dto)
         {
             var currentUser = User.Identity.GetUserId();
 
-            if (dto.ArtistId == currentUser)
+            if (dto.ArtistDetailId == currentUser)
                 return BadRequest("Cant follow yourself");
 
-            if (_context.Following.Any(f => f.FolloweeId == currentUser && f.FolloweeId == dto.ArtistId))
+            if (_context.Following.Any(f => f.FolloweeId == dto.ArtistDetailId && f.FollowerId ==currentUser ))
                 return BadRequest("Following already exists.");
-
             var followArtist = new Following
             {
-                FolloweeId = dto.ArtistId,
+                FolloweeId = dto.ArtistDetailId,
                 FollowerId = currentUser
             };
 
             _context.Following.Add(followArtist);
             _context.SaveChanges();
+
+            return Ok();
+        }
+
+        [System.Web.Http.HttpDelete]
+        public IHttpActionResult DeleteFollowing(string id)
+        {
+            var currentUser = User.Identity.GetUserId();
+
+            if (id == currentUser)
+                return BadRequest("Cant follow yourself");
+
+            var following =
+                _context.Following.SingleOrDefault(
+                    f => f.FollowerId == currentUser && f.FolloweeId == id);
+
+            if (following == null)
+                return NotFound();
+
+                _context.Following.Remove(following);
+                _context.SaveChanges();
+
 
             return Ok();
         }

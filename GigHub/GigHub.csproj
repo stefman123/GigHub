@@ -218,7 +218,6 @@
     <Compile Include="Controllers\Api\FollowArtistController.cs" />
     <Compile Include="Controllers\Api\GigsController.cs" />
     <Compile Include="Controllers\Api\NotificationsController.cs" />
-    <Compile Include="Controllers\Api\TestingController.cs" />
     <Compile Include="Controllers\FolloweesController.cs" />
     <Compile Include="Controllers\GigsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -306,6 +305,10 @@
     <Compile Include="Models\NotificationType.cs" />
     <Compile Include="Models\UserNotification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Respositories\AttendanceRepository.cs" />
+    <Compile Include="Respositories\FollowingRepository.cs" />
+    <Compile Include="Respositories\GenreRepository.cs" />
+    <Compile Include="Respositories\GigRepository.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="ViewModels\ExternalLoginListViewModel.cs" />
@@ -333,8 +336,10 @@
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\App\app.js" />
+    <Content Include="Scripts\App\controllers\artistController.js" />
     <Content Include="Scripts\App\controllers\gigsController.js" />
-    <Content Include="Scripts\App\Services\attendanceService.js" />
+    <Content Include="Scripts\App\services\attendanceService.js" />
+    <Content Include="Scripts\App\services\followService.js" />
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

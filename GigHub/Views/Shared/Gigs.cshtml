@@ -19,7 +19,7 @@
     </div>
 }
 
-<ul class="gigs voffset4">
+<ul id="renderedGigs" class="gigs voffset4">
     @foreach (var gig in Model.UpcomingGigs)
     {
         <li>
@@ -48,24 +48,25 @@
                     }
 
 
-                     @if (Model.ShowActions)
+                     @*@if (Model.ShowActions)
                      {
                          <button data-artist-id="@gig.Artist.Id" class="btn btn-default btn-sm js-toggle-follow">Follow?</button>
-                     }               
+                     }*@               
                 </span>              
                 <span class="genre">
                     @gig.Genre.Name
-                </span>
-                @if (Model.ShowActions && !gig.IsCanceled)
+                </span> 
+                <span>
+                    @if (Model.ShowActions && !gig.IsCanceled)
                 {
-                    <button
-                        data-gig-id="@gig.Id"
-                        class="btn 
-                            @(Model.Attendances.Contains(gig.Id) ? "btn-info" : "btn-default") 
+                        <button data-gig-id="@gig.Id"
+                                class="btn-display btn
+                            @(Model.Attendances.Contains(gig.Id) ? "btn-info" : "btn-default")
                             btn-sm pull-right js-toggle-attendance">
-                        Going?
-                    </button>
-                }
+                            Going?
+                        </button>
+                    }
+                </span>
             </div>
 
         </li>
@@ -76,25 +77,11 @@
 @section scripts
 {
     <script>
-        $(document)
-            .ready(function() {
+        $(document).ready(function() {
 
-                GigsController.init();
-
-                $(".js-toggle-follow")
-                    .click(function(e) {
-
-                        var button = $(e.target);
-                        $.post("/api/followartist", { ArtistId: button.attr("data-artist-id") })
-                            .done(function() {
-                                button.removeClass("btn-default")
-                                    .addClass("btn-info")
-                                    .text("Following!");
-                            })
-                            .fail(function() {
-                                alert("Something Failed Artist");
-                            });
-                    });
+                GigsController.init("#renderedGigs");
+                
+              
 
                 $(".js-SearchGig")
                     .click(function(e) {
