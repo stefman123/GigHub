@@ -3,18 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using GigHub.Models;
+using GigHub.Core;
+using GigHub.Core.Models;
+using GigHub.Persistence;
+using GigHub.Persistence.Respositories;
 using Microsoft.AspNet.Identity;
 
 namespace GigHub.Controllers
 {
     public class FolloweesController : Controller
     {
-        private ApplicationDbContext _context;
 
-        public FolloweesController()
+        private readonly IUnitOfWork _unitOfWork;
+
+        public FolloweesController( IUnitOfWork unitOfWork)
         {
-            _context = new ApplicationDbContext();
+            _unitOfWork = unitOfWork;
         }
 
         // GET: Artist
@@ -22,10 +26,8 @@ namespace GigHub.Controllers
         {
             var logInUserId = User.Identity.GetUserId();
 
-            var artistFollowing =
-                _context.Following.Where(a => a.FollowerId == logInUserId)
-                .Select(a => a.Followee)
-                .ToList();
+            var artistFollowing = _unitOfWork.Followers.GetFollowings(logInUserId);
+
             
             return View(artistFollowing);
         }

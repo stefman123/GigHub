@@ -3,8 +3,9 @@ using System.Web.Http;
 using System.Web.Http.Results;
 using System.Web.Mvc;
 using System.Web.Services.Description;
-using GigHub.Dtos;
-using GigHub.Models;
+using GigHub.Core.Dtos;
+using GigHub.Core.Models;
+using GigHub.Persistence;
 using Microsoft.AspNet.Identity;
 
 namespace GigHub.Controllers.Api

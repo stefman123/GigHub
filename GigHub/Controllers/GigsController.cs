@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
-using GigHub.Models;
+using GigHub.Core;
+using GigHub.Core.Models;
+using GigHub.Core.ViewModels;
 using GigHub.Persistence;
-using GigHub.Respositories;
-using GigHub.ViewModels;
 using Microsoft.AspNet.Identity;
 
 namespace GigHub.Controllers
@@ -65,7 +65,7 @@ namespace GigHub.Controllers
         public ActionResult CurrentGigs()
         {
             var loggedUserId = User.Identity.GetUserId();
-            var upcomingGigs = _unitOfWork.Gigs.GetFutureGigs(loggedUserId);
+            var upcomingGigs = _unitOfWork.Gigs.GetFutureGigsByUserId(loggedUserId);
 
             return View(upcomingGigs);
         }
