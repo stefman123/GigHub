@@ -7,7 +7,7 @@ using GigHub.Models;
 
 namespace GigHub.Respositories
 {
-    public class GigRepository
+    public class GigRepository : IGigRepository
     {
         private ApplicationDbContext _context;
 
@@ -56,6 +56,11 @@ namespace GigHub.Respositories
                 .Include(g => g.Artist)
                 .Include(g => g.Genre)
                 .ToList();
+        }
+
+        public void Add(Gig gig)
+        {
+            _context.Gigs.Add(gig);
         }
     }
 }

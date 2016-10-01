@@ -6,7 +6,7 @@ using GigHub.Models;
 
 namespace GigHub.Respositories
 {
-    public class GenreRepository
+    public class GenreRepository : IGenreRepository
     {
         private ApplicationDbContext _context;
 
