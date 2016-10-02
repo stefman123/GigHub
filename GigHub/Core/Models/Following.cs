@@ -9,13 +9,13 @@ namespace GigHub.Core.Models
 
         public ApplicationUser Follower { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
+        //[Key]
+        //[Column(Order = 1)]
         public string FolloweeId { get; set; }
 
 
-        [Key]
-        [Column(Order = 2)]
+        //[Key]
+        //[Column(Order = 2)]
         public string  FollowerId { get; set; }
 
     }

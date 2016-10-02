@@ -1,5 +1,6 @@
 using System.Data.Entity;
 using GigHub.Core.Models;
+using GigHub.Persistence.EntityConfigurations;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace GigHub.Persistence
@@ -29,21 +30,14 @@ namespace GigHub.Persistence
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //Turn off Cascade On Delete with fluent api
-            modelBuilder.Entity<Attendence>()
-                .HasRequired(a => a.Gig)
-                .WithMany( g => g.Attendances)
-                .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<ApplicationUser>()
-                .HasMany(u => u.Followers)
-                .WithRequired(f => f.Followee)
-                .WillCascadeOnDelete(false);
+            modelBuilder.Configurations.Add(new GigConfiguration());
 
-            modelBuilder.Entity<ApplicationUser>()
-                .HasMany(u => u.Followees)
-                .WithRequired(f => f.Follower)
-                .WillCascadeOnDelete(false);
+            modelBuilder.Configurations.Add(new ApplicationUserConfigurations());
+
+            modelBuilder.Configurations.Add(new FollowingConfigurations());
+
+            modelBuilder.Configurations.Add(new AttendanceConfigurations());
 
             modelBuilder.Entity<UserNotification>()
                 .HasRequired(n => n.User)
