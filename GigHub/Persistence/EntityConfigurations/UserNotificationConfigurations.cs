@@ -12,7 +12,9 @@ namespace GigHub.Persistence.EntityConfigurations
 
         public UserNotificationConfigurations()
         {
-            HasKey(u => new {u.UserId, u.NotificationId});
+            //HasKey<string>(u =>  u.UserId);
+            //HasKey<int>(u =>  u.NotificationId );
+            HasKey(u => new { u.UserId, u.NotificationId });
 
         }
 

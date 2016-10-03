@@ -44,6 +44,7 @@ namespace GigHub.Persistence.Respositories
         {
            return _context.Gigs
                 .Include(g => g.Attendances.Select(a => a.Attendee))
+                .Include(g => g.Artist)
                 .SingleOrDefault(g => g.Id == gigId);
 
         }

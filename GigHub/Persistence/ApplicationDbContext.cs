@@ -39,6 +39,10 @@ namespace GigHub.Persistence
 
             modelBuilder.Configurations.Add(new AttendanceConfigurations());
 
+            modelBuilder.Configurations.Add(new GenreConfiguration());
+
+            modelBuilder.Configurations.Add(new UserNotificationConfigurations());
+
             modelBuilder.Entity<UserNotification>()
                 .HasRequired(n => n.User)
                 .WithMany(u => u.UserNotifications)

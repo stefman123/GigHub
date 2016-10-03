@@ -31,24 +31,17 @@ namespace GigHub.Controllers.Api
             var userId = User.Identity.GetUserId();
             var gig = _unitOfWork.Gigs.GetGigWithAttendees(id);
 
-            if (gig == null)
+            if (gig == null || gig.IsCanceled)
                 return NotFound();
 
             if (gig.ArtistId != userId)
             {
-                 throw new HttpResponseException(HttpStatusCode.Unauthorized);
+                return Unauthorized();
             }
 
             //_context.Gigs
                 //.Include(g => g.Attendances.Select(a => a.Attendee))
                 //.Single(g => g.Id == id && g.ArtistId == userId);
-
-
-
-            if (gig.IsCanceled)
-            {
-                return NotFound();
-            }
 
             gig.Cancel();
 

@@ -15,10 +15,10 @@ namespace GigHub.Tests.Extentions
        {
             //search mocking user.identity
             var identity = new GenericIdentity(username);
-            identity.AddClaim(new Claim("http://schemas.xmlsoap.org/ws/2005/05/identuty/claims/name",
+            identity.AddClaim(new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
                 username));
             identity.AddClaim(
-                new Claim("http://schemas.xmlsoap.org/ws/2005/05/identuty/claims/nameidentity", userId));
+                new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier", userId));
 
             var principal = new GenericPrincipal(identity, null);
 
