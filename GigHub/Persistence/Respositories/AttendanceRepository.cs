@@ -22,10 +22,26 @@ namespace GigHub.Persistence.Respositories
                 .ToList();
         }
 
-        public bool CheckAttendences(string currentUser, Gig gig)
+        public bool CheckAttendences(string currentUser, int gigId)
         {
            return _context.Attendences
-                    .Any(a => a.GigId == gig.Id && a.AttendeeId == currentUser);
+                    .Any(a => a.GigId == gigId && a.AttendeeId == currentUser);
+        }
+
+        public Attendence GetAttendence(string currentUser, int gigId)
+        {
+           return _context.Attendences
+                    .SingleOrDefault(a => a.GigId == gigId && a.AttendeeId == currentUser);
+        }
+
+        public void Add(Attendence attendence)
+        {
+            _context.Attendences.Add(attendence);
+        }
+
+        public void Remove(Attendence attendence)
+        {
+            _context.Attendences.Remove(attendence);
         }
     }
 }

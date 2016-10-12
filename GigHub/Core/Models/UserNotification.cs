@@ -34,7 +34,9 @@ namespace GigHub.Core.Models
             }
 
             User = user;
+            UserId = user.Id;
             Notification = notification;
+            NotificationId = notification.Id;
         }
 
         public void Read()

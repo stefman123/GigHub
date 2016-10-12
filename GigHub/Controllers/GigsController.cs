@@ -87,7 +87,7 @@ namespace GigHub.Controllers
 
             if (User.Identity.IsAuthenticated)
             {
-                viewModel.IsAttending = _unitOfWork.Attendances.CheckAttendences(currentUser, gig);
+                viewModel.IsAttending = _unitOfWork.Attendances.CheckAttendences(currentUser, gig.Id);
 
                 viewModel.IsFollowing = _unitOfWork.Followers.CheckFollowing(currentUser, gig);
 

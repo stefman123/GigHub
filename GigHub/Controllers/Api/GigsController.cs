@@ -40,8 +40,8 @@ namespace GigHub.Controllers.Api
             }
 
             //_context.Gigs
-                //.Include(g => g.Attendances.Select(a => a.Attendee))
-                //.Single(g => g.Id == id && g.ArtistId == userId);
+            //.Include(g => g.Attendances.Select(a => a.Attendee))
+            //.Single(g => g.Id == id && g.ArtistId == userId);
 
             gig.Cancel();
 

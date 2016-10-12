@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Web.Http;
+using GigHub.Core;
 using GigHub.Core.Dtos;
 using GigHub.Core.Models;
 using GigHub.Persistence;
@@ -10,28 +11,35 @@ namespace GigHub.Controllers.Api
     [Authorize]
     public class AttendancesController : ApiController
     {
-        private ApplicationDbContext _context;
+        private IUnitOfWork _unitOfWork;
 
-        public AttendancesController()
+        public AttendancesController(IUnitOfWork unitOfWork)
         {
-            _context = new ApplicationDbContext();
+            _unitOfWork = unitOfWork;
         }
 
         [HttpPost]
-        public IHttpActionResult Attend(AttendanceDto dto)
+        public IHttpActionResult Attend(Attendance dto)
         {
             var userId = User.Identity.GetUserId();
 
-            if (_context.Attendences.Any(a => a.AttendeeId == userId && a.GigId == dto.GigId))
+            if (_unitOfWork.Attendances.GetAttendence(userId, dto.GigId) != null)
                 return BadRequest("The attendance already exists.");
+            //var hmm = _unitOfWork.Attendances.GetAttendence(userId, dto.GigId);
+
+            if (dto.GigId == 0)
+            {
+                return NotFound();
+            }
 
             var attendance = new Attendence
             {
                 GigId = dto.GigId,
                 AttendeeId = userId
             };
-            _context.Attendences.Add(attendance);
-            _context.SaveChanges();
+
+            _unitOfWork.Attendances.Add(attendance);  
+            _unitOfWork.Complete();
 
             return Ok();
         }
@@ -42,15 +50,15 @@ namespace GigHub.Controllers.Api
         {
             var userId = User.Identity.GetUserId();
 
-           var attendance = _context.Attendences.SingleOrDefault(a => a.AttendeeId == userId && a.GigId == id);
+            var attendance = _unitOfWork.Attendances.GetAttendence(userId, id);
 
             if (attendance == null)
             {
                 return NotFound();
             }
 
-            _context.Attendences.Remove(attendance);
-            _context.SaveChanges();
+            _unitOfWork.Attendances.Remove(attendance);
+            _unitOfWork.Complete();
 
             return Ok(id);
         }

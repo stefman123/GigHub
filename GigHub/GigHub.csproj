@@ -277,6 +277,7 @@
     <Compile Include="Persistence\EntityConfigurations\GigConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\NotificationConfigurations.cs" />
     <Compile Include="Persistence\EntityConfigurations\UserNotificationConfigurations.cs" />
+    <Compile Include="Persistence\IApplicationDbContext.cs" />
     <Compile Include="Persistence\Migrations\201607211406251_IntialModel.cs" />
     <Compile Include="Persistence\Migrations\201607211406251_IntialModel.Designer.cs">
       <DependentUpon>201607211406251_IntialModel.cs</DependentUpon>
@@ -349,6 +350,10 @@
     <Compile Include="Core\Models\NotificationType.cs" />
     <Compile Include="Core\Models\UserNotification.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
+    <Compile Include="Core\Repositories\INotificationsRepository.cs" />
+    <Compile Include="Core\Repositories\IUserNotificationsRespository.cs" />
+    <Compile Include="Persistence\Respositories\NotificationsRepository.cs" />
+    <Compile Include="Persistence\Respositories\UserNotificationsRespository.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Persistence\Respositories\AttendanceRepository.cs" />
